@@ -1,16 +1,15 @@
-import { bytesToSize } from './helpers'
+import { bytesToSize, createElement } from './helpers'
 
 export function upload (selector, options) {
   let files = []
 
   const input = document.querySelector(selector)
   
-  const preview = document.createElement('div')
-  preview.classList.add('preview')
-  
-  const openBtn = document.createElement('button')
-  openBtn.classList.add('btn')
-  openBtn.textContent = 'Открыть'
+  const preview = createElement('div', ['preview'])  
+  const openBtn = createElement('button', ['btn'], 'Открыть')
+  const uploadBtn = createElement('button', ['btn', 'primary'], 'Загрузить')
+  // TODO: подумать как сделать это более изящно
+  uploadBtn.style.display = 'none'
 
   if (options.multi) {
     input.setAttribute('multiple', true)
@@ -21,6 +20,7 @@ export function upload (selector, options) {
   }
 
   input.insertAdjacentElement('afterend', preview)
+  input.insertAdjacentElement('afterend', uploadBtn)
   input.insertAdjacentElement('afterend', openBtn)
 
   const triggerInput = () => input.click()
@@ -36,6 +36,8 @@ export function upload (selector, options) {
       // отбираем только изображения
       if (!file.type.match('image')) return
 
+      // TODO: подумать как сделать это более изящно
+      uploadBtn.style.display = 'inline'
       // специальный класс файл ридера
       const reader = new FileReader()
 
@@ -64,6 +66,10 @@ export function upload (selector, options) {
     // просто удалить элемент из массива не достаточно, нужно еще произвести перерендер
     files = files.filter(file => file.name !== name)
 
+    // TODO: подумать как сделать это более изящно
+    if (!files.length) {
+      uploadBtn.style.display = 'none'
+    }
     // найдем в review блоке елемент с нужным именем
     const currentImageBlock = preview.querySelector(`[data-name="${name}"]`).parentElement // same preview.querySelector(`[data-name="${name}"]`).closest('.preview-image')
 
@@ -72,9 +78,14 @@ export function upload (selector, options) {
     setTimeout(() => currentImageBlock.remove(), 300)
   }
 
+  const uploadBtnClickHandler = () => {
+
+  }
+
   openBtn.addEventListener('click', triggerInput)
   input.addEventListener('change', changeHandler)
   preview.addEventListener('click', previewRemoveClickHandler)
+  uploadBtn.addEventListener('click', uploadBtnClickHandler)
 }
 
 
