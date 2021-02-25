@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body {
+  background-color: #678;
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  padding-top: 5rem;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.card {
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 1rem;
+  box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn {
+  color: #42b983;
+  position: relative;
+  border-radius: 99px;
+  border: 1px solid #42b983;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 0.5rem 1.5rem;
+  font-weight: 700;
+  outline: none;
+  background-color: #fff;
+  transition: all 0.22s;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+.btn.primary {
+  background-color: #42b983;
+  color: #fff;
+}
+
+.btn:active {
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.btn:hover {
+  cursor: pointer;
+  opacity: 0.8 ;
+}
+
+input[type=file] {
+  display: none;
+}
+
+.preview {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 0.5rem;
+}
+
+.preview-image {
+  position: relative;
+  margin-bottom: .5rem;
+  margin-right: .5rem;
+  overflow: hidden;
+}
+
+.preview-image.removing {
+  transform: scale(0);
+  transition: transform 0.3s;
+}
+
+.preview-image img {
+  display: block;
+  width: 180px;
+  height: auto;
+}
+
+/* когда навели на .preview-image примени стили к .preview-remove */
+.preview-image:hover .preview-remove {
+  opacity: 1;
+}
+
+.preview-image:hover .preview-info {
+  bottom: 0;
+}
+
+.preview-remove {
+  /* CSS-свойство opacity устанавливает непрозрачность элемента. Непрозрачность - это степень, в которой содержимое скрывается за элементом, является противоположностью прозрачности. */
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  /* свойство transition задает время смены сосотояния указанного в первом аргументе, если первого аргумиента нет, то задержка сработает для всех изменяемых свойст (обычно используют для :hover или :active свойств */
+  transition: opacity 0.27s;
+}
+
+.preview-info {
+  position: absolute;
+  left: 0;
+  /* не видно благодаря overflow: hideden у родителя */
+  bottom: -30px;
+  right: 0;
+  height: 24px;
+  font-size: 0.8rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+  transition: bottom 0.27s;
+}
