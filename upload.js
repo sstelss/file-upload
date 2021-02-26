@@ -92,6 +92,8 @@ export function upload (selector, options) {
     // заменим инфо блок, на отображающий прогресс загрузки
     const previewInfo = preview.querySelectorAll('.preview-info')
     previewInfo.forEach(clear)
+
+    onUpload(files, previewInfo)
   }
 
   openBtn.addEventListener('click', triggerInput)

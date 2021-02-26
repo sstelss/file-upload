@@ -121,12 +121,13 @@ input[type=file] {
 }
 
 .preview-info-progress {
-   position: absolute;
-   top: 0;
-   bottom: 0;
-   left: 0;
-   background-color: #42b983;
-   text-align: center ;
-   transition: width 0.27s;
-   width: 30%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #42b983;
+  transition: width 0.27s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
