@@ -1,8 +1,11 @@
 import { bytesToSize, createElement } from './helpers'
 
+function __DUMMI__ () {}
+
 export function upload (selector, options) {
   let files = []
-
+  // ?? проверяет только null и undefined, а значения топа 0, '', false пропускает
+  const onUpload = options.onUpload ?? __DUMMI__
   const input = document.querySelector(selector)
   
   const preview = createElement('div', ['preview'])  
@@ -78,8 +81,17 @@ export function upload (selector, options) {
     setTimeout(() => currentImageBlock.remove(), 300)
   }
 
-  const uploadBtnClickHandler = () => {
+  const clear = el => {
+    el.style.bottom = '0'
+    el.innerHTML = '<div class="preview-info-progress"></div>'
+  }
 
+  const uploadBtnClickHandler = () => {
+    // уберем возможность удаления
+    preview.querySelectorAll('.preview-remove').forEach(el => el.remove())
+    // заменим инфо блок, на отображающий прогресс загрузки
+    const previewInfo = preview.querySelectorAll('.preview-info')
+    previewInfo.forEach(clear)
   }
 
   openBtn.addEventListener('click', triggerInput)

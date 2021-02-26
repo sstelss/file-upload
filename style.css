@@ -119,3 +119,14 @@ input[type=file] {
   padding: 0 5px;
   transition: bottom 0.27s;
 }
+
+.preview-info-progress {
+   position: absolute;
+   top: 0;
+   bottom: 0;
+   left: 0;
+   background-color: #42b983;
+   text-align: center ;
+   transition: width 0.27s;
+   width: 30%;
+}
